@@ -15,3 +15,9 @@
 ![GitHub Release Date](https://img.shields.io/github/release-date/ReserveBlockIO/TrilliumWebIDE)
 
 Trillium is the smart contract language that will be powering our smart contracts. This is a from scratch language that has roots from C#, C, and some Javascript.
+
+
+# License
+
+Trillium is released under the terms of the MIT license. See [COPYING](COPYING) for more
+information or see https://opensource.org/licenses/MIT.
