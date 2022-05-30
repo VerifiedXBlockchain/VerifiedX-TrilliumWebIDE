@@ -1,4 +1,4 @@
-# Trillium Web IDE
+# Trillium Web IDE (tIDE)
 
 [![Generic badge](https://img.shields.io/badge/IDE-VS2022-blue.svg)](https://shields.io/)
 [![Generic badge](https://img.shields.io/badge/C%23-10%2E0-blue.svg)](https://shields.io/)
