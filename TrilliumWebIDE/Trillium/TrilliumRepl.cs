@@ -191,7 +191,7 @@ namespace TrilliumWebIDE.Trillium
 		private static string GetSubmissionsDirectory()
 		{
 			var localAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-			var submissionsDirectory = Path.Combine(localAppData, "Trillium", "Submissions");
+			var submissionsDirectory = Path.Combine("D:/", "Trillium", "Submissions");
 			return submissionsDirectory;
 		}
 
