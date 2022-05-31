@@ -1,0 +1,170 @@
+﻿@page "/calculator"
+
+<div class="row-cols-md-8">
+    <RadzenCard class="m-1" style="margin-bottom: 15px !important;">
+        <h3 class="h3" style="color:darkturquoise;">Making a Calculator</h3>
+        <div class="row">
+                <p>
+                    Below is a video instruction on how to create a Calculator using Trillium!
+                </p>
+                <br />
+                <p>
+                    In this example we will be creating a calculator program that will accept two types of int (firstNum and secondNum) as well
+                    as an operator type and it will return a type of string.
+                </p>
+        </div>
+    </RadzenCard>
+    <RadzenCard class="m-1" style="margin-bottom: 15px !important;">
+        <h3 class="h3" style="color:darkturquoise;">Step 1: Create the function</h3>
+        <div class="row">
+            <br />
+            <p>
+                Below we will create the function for your calculator program
+            </p>
+           
+            <br />
+
+
+            <div style="width:60%; margin-top: 10px; margin-bottom:10px;">
+<textarea id="code" name="code" readonly="readonly" style="width:60%;">
+function calculator(firstNum : int, secondNum : int, operator : string) : string
+{
+    
+}</textarea>
+            </div>
+            <br />
+            <br />
+            <p>
+                In this example we have created a function called calculator. This function accepts a type <span style="color:darkturquoise;">'int'</span> and 
+                is called <span style="color:darkturquoise;">'firstNum'</span>. The secondNum is the same and the operator is of type 'string'. It will also return a type of string
+                which is indicated at the end of the closed parenthesis <span style="color:darkturquoise;">') : string'</span>
+            </p>
+        </div>
+    </RadzenCard>
+
+        <RadzenCard class="m-1" style="margin-bottom: 15px !important;">
+        <h3 class="h3" style="color:darkturquoise;">Step 2: Create the conditional statements for operator types</h3>
+        <div class="row">
+            <br />
+            <p>
+                Below we are going to create the conditional statements for the support operator types of '+', '-', '*', '/'. We will also create a function to return our
+                result like in the helloWorld example. This will be called 'result'.
+            </p>
+           
+            <br />
+
+            <div style="width:60%; margin-top: 10px; margin-bottom:10px;">
+<textarea id="code2" name="code" readonly="readonly" style="width:60%;">
+function calculator(firstNum : int, secondNum : int, operator : string) : string
+{
+    var result = 0
+    if operator == "+"
+    {
+        
+    }
+    else if operator == "-"
+    {
+        
+    }
+    else if operator == "*"
+    {
+        
+    }
+    else if operator == "/"
+    {
+        
+    }
+    else 
+    {
+        return "No known operator was given"
+    }
+}</textarea>
+            </div>
+            <br />
+            <br />
+            <p>
+                In this example we have created a function called calculator. This function accepts a type <span style="color:darkturquoise;">'int'</span> and 
+                is called <span style="color:darkturquoise;">'firstNum' and 'secondNum'</span>. It will also return a type of string
+                which is indicated at the end of the closed parenthesis <span style="color:darkturquoise;">') : string'</span>. This function also now stores the result
+                that is passed into it into the variable 'result'.
+            </p>
+        </div>
+    </RadzenCard>
+
+            <RadzenCard class="m-1" style="margin-bottom: 15px !important;">
+        <h3 class="h3" style="color:darkturquoise;">Step 3: Do Arithmetic and Return Result</h3>
+        <div class="row">
+            <br />
+            <p>
+                Below we are taking all the variables passed in and performing the correct arithmetic operation on them based on the operator passed in. 
+                If no known operator is passed in we will return the message 'No known operator was given'.
+            </p>
+           
+            <br />
+
+            <div style="width:60%; margin-top: 10px; margin-bottom:10px;">
+<textarea id="code3" name="code" readonly="readonly" style="width:60%;">
+function calculator(firstNum : int, secondNum : int, operator : string) : string
+{
+    var result = 0
+    if operator == "+"
+    {
+        result = firstNum + secondNum
+        return string(result)
+    }
+    else if operator == "-"
+    {
+        result = firstNum - secondNum
+        return string(result)
+    }
+    else if operator == "*"
+    {
+        result = firstNum * secondNum
+        return string(result)
+    }
+    else if operator == "/"
+    {
+        result = firstNum / secondNum
+        return string(result)
+    }
+    else 
+    {
+        return "No known operator was given"
+    }
+}</textarea>
+            </div>
+            <br />
+            <br />
+            <p>
+                Congrats! You have created your first calculator with Trillium! Below is a video that will walk you through all of this in case you
+                are stuck at any points.
+            </p>
+        </div>
+    </RadzenCard>
+    <br />
+    <RadzenCard class="m-1" style="margin-bottom: 15px !important;">
+        <h3 class="h3" style="color:darkturquoise;">Making a Calculator in tIDE</h3>
+        <video class="w-100" id="tintrovideo" style="max-width: 800px;" controls="controls" _bl_796fa517-712e-4cf5-b8d6-7a4d940f2947="">
+            <source src="videos/trillcalc.mp4" type="video/mp4">
+        </video>
+    </RadzenCard>
+
+</div>
+
+
+@code {
+    [Inject] private IJSRuntime _js { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        //await _js.InvokeVoidAsync("highlightSnippet");
+        if(firstRender)
+        {
+            var output = await _js.InvokeAsync<string>("highlightSnippet");
+            var output2 = await _js.InvokeAsync<string>("highlightSnippet2");
+            var output3 = await _js.InvokeAsync<string>("highlightSnippet3");
+            await InvokeAsync( StateHasChanged );
+        }
+
+    }
+}
