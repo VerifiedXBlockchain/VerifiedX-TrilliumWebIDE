@@ -18,7 +18,7 @@ Trillium is the smart contract language that will be powering our smart contract
 
 # tIDE - The Trillium Browser Based IDE
 
-![image](https://user-images.githubusercontent.com/20599614/171071872-b90465b8-5f28-4332-9ce8-99c678b8f057.png)
+![image](https://user-images.githubusercontent.com/20599614/171252204-f45f1b8d-052d-4ef1-af53-142503383f88.png)
 
 # License
 
