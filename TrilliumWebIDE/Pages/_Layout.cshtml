@@ -114,19 +114,6 @@
 
     </script>
 
-    <script>
-    function backgroundVideo() {
-
-       $("video source").each(function () {
-          var sourceFile = $(this).attr("data-src");
-          $(this).attr("src", sourceFile);
-          var video = this.parentElement;
-          video.load();
-       });
-
-    }
-    window.onload = backgroundVideo;
-</script>
 <style>
   .jumbotron {
      background-color: #454545;
