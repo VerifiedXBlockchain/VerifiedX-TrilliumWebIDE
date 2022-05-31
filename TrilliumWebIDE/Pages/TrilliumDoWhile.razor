@@ -1,0 +1,51 @@
+﻿@page "/trilliumdowhile"
+
+<div class="row-cols-md-8">
+    <RadzenCard class="m-1" style="margin-bottom: 15px !important;">
+        <h3 class="h3" style="color:darkturquoise;">Do While Statements in Trillium</h3>
+        <div class="row">
+                <p>
+                    In Trillium the do while loop is the basically a while loop except that it will executes the code block at least one time.
+                </p>
+                <br />
+                <p>
+                    The do-while loop starts with the do keyword followed by a code block and a boolean expression with the while keyword. 
+                    The do while loop stops execution exits when a boolean condition yields to false. 
+                    Because the while(condition) is specified at the end of the block, it will be guaranteed to execute the block at least one time.
+                </p>
+
+        </div>
+    </RadzenCard>
+    <RadzenCard class="m-1" style="margin-bottom: 15px !important;">
+        <h3 class="h3" style="color:darkturquoise;">Do-While Loops Explained</h3>
+        <div class="row">
+            <br />
+            <p>
+                Below is a basic example of a Do-While loop in Trillium
+            </p>
+           
+            <br />
+                        <div style="width:60%; margin-top: 10px; margin-bottom:10px;">
+<textarea id="code" name="code" readonly="readonly" style="width:60%;">@(@"var i = 0 do { i = i + 1 if i == 5 continue } while i < 5 return i  //returns 5")</textarea>
+            </div>
+        </div>
+    </RadzenCard>
+
+
+</div>
+
+
+@code {
+    [Inject] private IJSRuntime _js { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        //await _js.InvokeVoidAsync("highlightSnippet");
+        if(firstRender)
+        {
+            var output = await _js.InvokeAsync<string>("highlightSnippet");
+            await InvokeAsync( StateHasChanged );
+        }
+
+    }
+}

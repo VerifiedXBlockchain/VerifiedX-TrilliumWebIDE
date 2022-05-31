@@ -1,0 +1,50 @@
+﻿@page "/trilliumfor"
+
+<div class="row-cols-md-8">
+    <RadzenCard class="m-1" style="margin-bottom: 15px !important;">
+        <h3 class="h3" style="color:darkturquoise;">For Statements in Trillium</h3>
+        <div class="row">
+                <p>
+                    In Trillium the for keyword indicates a loop. 
+                    The for loop executes a block of statements repeatedly until the specified condition yields false.
+                </p>
+                <br />
+                <p>
+                    For Loops in Trillium require a condition that will keep the block executing until that condition is met 'for i = 1 to 10'
+                </p>
+
+        </div>
+    </RadzenCard>
+    <RadzenCard class="m-1" style="margin-bottom: 15px !important;">
+        <h3 class="h3" style="color:darkturquoise;">For Loops Explained</h3>
+        <div class="row">
+            <br />
+            <p>
+                Below is a basic example of a for loop in Trillium
+            </p>
+           
+            <br />
+                        <div style="width:60%; margin-top: 10px; margin-bottom:10px;">
+<textarea id="code" name="code" readonly="readonly" style="width:60%;">@(@"var result = 0 for i = 1 to 10 { result = result + i } return result  //returns 55")</textarea>
+            </div>
+        </div>
+    </RadzenCard>
+
+
+</div>
+
+
+@code {
+    [Inject] private IJSRuntime _js { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        //await _js.InvokeVoidAsync("highlightSnippet");
+        if(firstRender)
+        {
+            var output = await _js.InvokeAsync<string>("highlightSnippet");
+            await InvokeAsync( StateHasChanged );
+        }
+
+    }
+}

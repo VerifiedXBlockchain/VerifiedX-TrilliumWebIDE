@@ -1,0 +1,183 @@
+﻿@page "/trilliumevolve"
+
+<div class="row-cols-md-8">
+
+
+    <RadzenCard class="m-1" style="margin-bottom: 15px !important;">
+        <h3 class="h3" style="color:darkturquoise;">How to Make a Evolving NFT</h3>
+        <video class="w-100" id="tintrovideo" style="max-width: 1400px;" controls="controls" _bl_796fa517-712e-4cf5-b8d6-7a4d940f2947="">
+            <source src="videos/trillevosc.mp4" type="video/mp4">
+        </video>
+    </RadzenCard>
+    <RadzenCard class="m-1" style="margin-bottom: 15px !important;">
+        <h3 class="h3" style="color:darkturquoise;">Evolve NFT Code</h3>
+        <div class="row">
+            <div style="width:90%;">
+<textarea id="code" name="code" readonly="readonly" style="width:60%;">@(@"let RoyaltyType = ""1""
+let RoyaltyAmount = ""10""
+let RoyaltyPayToAddress = ""Rxyz""
+var EvolutionaryState = ""{*0}""
+let EvolutionaryMaxState = ""3""
+let EvolveDynamic = false
+let Name = ""Trillium NFT""
+let Description = ""The First NFT From Trillium for RBX""
+let Address = ""Rxxx""
+let MinterAddress = ""Rxxx""
+let MinterName = ""Any Name""
+let SmartContractUID = ""assign""
+let Signature = ""Insert Signature""
+let Features = """"
+let Extension = ""jpg""
+let FileSize = ""2""
+let Location = ""D:/Trillium.jpg""
+let FileName = ""Trillium.jpg""
+let AssetAuthorName = ""T-Real-Ium""
+
+function NftMain(data : string) : string
+{
+  if data == ""nftdata""
+  {
+    return GetNFTData(Name, Description, Address, MinterAddress)
+  }
+  else if data == ""getnftassetdata""
+  {
+    return GetNFTAssetData(FileName, Location, FileSize, Extension, AssetAuthorName)
+  }
+  else if data == ""getroyaltydata""
+  {
+    return GetRoyaltyData(RoyaltyType, RoyaltyAmount, RoyaltyPayToAddress)
+  }
+  return ""No Method Named "" + data + "" was found.""
+}
+
+function GetNFTData(name : string, desc : string, addr : string, mintAddr: string) : string
+{
+  return name + ""|->"" + desc + ""|->"" + addr + ""|->"" + mintAddr
+}
+
+function GetNFTAssetData(fileName : string, loc : string, fileSize : string, ext : string, assetAuthor : string) : string
+{
+  return (fileName + ""|->"" + loc + ""|->"" + fileSize + ""|->"" + ext + ""|->"" + assetAuthor)
+}
+
+function GetNFTId() : string
+{
+  return SmartContractUID
+}
+
+function GetNFTFeatures() : string
+{
+  return Features
+}
+
+function GetNFTSignature() : string
+{
+  return Signature
+}
+function GetRoyaltyData(royaltyType  : string, royaltyAmount : string, royaltyPayToAddress : string) : string
+{
+   return (royaltyType + ""|->"" + royaltyAmount + ""|->"" + royaltyPayToAddress)
+}
+
+function GetCurrentEvolveState() : string
+{
+   var evoState = EvolutionaryState
+   return evoState
+}
+
+function EvolveStates() : string
+{
+  return EvolutionaryMaxState
+}
+
+function Evolve(evoState : int) : string
+{
+   if evoState < int(EvolutionaryMaxState)
+   {
+       var newEvolveState = evoState + 1
+       if(newEvolveState > int(EvolutionaryMaxState))
+       {
+          return ""Failed to Evolve.""
+       }
+      EvolutionaryState = ""{*"" + string(newEvolveState) + ""}""
+       return string(newEvolveState)
+   }
+  return ""Failed to Evolve.""
+}
+
+function Devolve(evoState : int) : string
+{
+  if evoState > 0
+  {
+    var newEvolveState = evoState - 1
+    if(newEvolveState < 0)
+    {
+      return ""Failed to Devolve.""
+    }
+
+    EvolutionaryState = ""{*"" + string(newEvolveState) + ""}""
+      return string(newEvolveState)
+    }
+    return ""Failed to Devolve.""
+}
+
+function ChangeEvolveStateSpecific(evoState : int) : string
+{
+if evoState <= int(EvolutionaryMaxState) && evoState >= 0
+{
+EvolutionaryState = ""{*"" + string(evoState) + ""}""
+return string(evoState)
+}
+return ""Failed to Evolve.""
+}
+function EvolveStateA() : string
+{
+var evoState = ""1""
+var name = ""EvolveA""
+var description = ""Evolve A Desc""
+var assetName = ""trillywilly2.jpg""
+var evolveDate = """"
+var evolveAtBlock = """"
+return (evoState + ""|->"" + name + ""|->"" + description + ""|->"" + assetName + ""|->"" + evolveDate + ""|->"" + evolveAtBlock)
+}
+function EvolveStateB() : string
+{
+var evoState = ""2""
+var name = ""EvolveB""
+var description = ""Evolve B Desc""
+var assetName = """"
+var evolveDate = """"
+var evolveAtBlock = """"
+return (evoState + ""|->"" + name + ""|->"" + description + ""|->"" + assetName + ""|->"" + evolveDate + ""|->"" + evolveAtBlock)
+}
+function EvolveStateC() : string
+{
+var evoState = ""3""
+var name = ""EvolveC""
+var description = ""Evolve C Desc""
+var assetName = """"
+var evolveDate = """"
+var evolveAtBlock = """"
+return (evoState + ""|->"" + name + ""|->"" + description + ""|->"" + assetName + ""|->"" + evolveDate + ""|->"" + evolveAtBlock)
+}")</textarea>
+            </div>
+            <br />
+        </div>
+    </RadzenCard>
+</div>
+
+
+@code {
+    [Inject] private IJSRuntime _js { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        //await _js.InvokeVoidAsync("highlightSnippet");
+        if(firstRender)
+        {
+            var output = await _js.InvokeAsync<string>("highlightSnippet");
+            await InvokeAsync( StateHasChanged );
+        }
+
+    }
+}

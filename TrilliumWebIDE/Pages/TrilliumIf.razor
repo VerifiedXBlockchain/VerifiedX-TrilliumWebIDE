@@ -1,0 +1,121 @@
+﻿@page "/trilliumif"
+
+<div class="row-cols-md-8">
+    <RadzenCard class="m-1" style="margin-bottom: 15px !important;">
+        <h3 class="h3" style="color:darkturquoise;">If, Else If, and Else Statements in Trillium</h3>
+        <div class="row">
+                <p>
+                    Trillium provides many decision-making statements that help the flow of the smart contract based on certain logical conditions. 
+                    Here, we will go over if, else if, else, and nested if else statements to control the flow based on the conditions.
+                </p>
+                <br />
+                <p>
+                    The If/Else Operators in Trillium are the following:
+                </p>
+                <ul style="margin-left:18px;">
+                    <li>
+                        if statement
+                    </li>
+                    <li>
+                        else-if statement
+                    </li>
+                    <li>
+                        else statement
+                    </li>
+                </ul>
+        </div>
+    </RadzenCard>
+    <RadzenCard class="m-1" style="margin-bottom: 15px !important;">
+        <h3 class="h3" style="color:darkturquoise;">If Statements Explained</h3>
+        <div class="row">
+            <br />
+            <p>
+                The if statement contains a boolean condition followed by a single or multi-line code block to be executed. 
+                At runtime, if a boolean condition evaluates to true, then the code block will be executed, otherwise not.
+                You can specify if you want the false condition to be the deciding factor for a code block to be entered also
+            </p>
+           
+            <br />
+                        <div style="width:60%; margin-top: 10px; margin-bottom:10px;">
+<textarea id="code" name="code" readonly="readonly" style="width:60%;">if(condition)
+{
+    // code block to be executed when if condition evaluates to true
+}
+var a = 0 if a == 0 a = 10 return a // returns 10
+</textarea>
+            </div>
+        </div>
+    </RadzenCard>
+
+<RadzenCard class="m-1" style="margin-bottom: 15px !important;">
+        <h3 class="h3" style="color:darkturquoise;">Else If Statement</h3>
+        <div class="row">
+            <br />
+            <p>
+                Multiple else if statements can be used after an if statement. It will only be executed 
+                when the if condition evaluates to false (or true if specified with correct operator). So, 
+                either if or one of the else if statements can be executed, but not both.
+            </p>
+           
+            <br />
+
+            <div style="width:60%; margin-top: 10px; margin-bottom:10px;">
+<textarea id="code2" name="code" readonly="readonly" style="width:60%;">@(@"if(condition1)
+{
+    // code block to be executed when if condition1 evaluates to true
+}
+else if(condition2)
+{
+    // code block to be executed when 
+    //      condition1 evaluates to flase
+    //      condition2 evaluates to true
+}
+else if(condition3)
+{
+    // code block to be executed when 
+    //      condition1 evaluates to flase
+    //      condition2 evaluates to false
+    //      condition3 evaluates to true
+}")</textarea>
+            </div>
+            <br />
+        </div>
+</RadzenCard>
+
+<RadzenCard class="m-1" style="margin-bottom: 15px !important;">
+        <h3 class="h3" style="color:darkturquoise;">Else Statement</h3>
+        <div class="row">
+            <br />
+            <p>
+                The else statement can come only after if or else if statement and can be used only once in the if-else statements tree. 
+                 The else statement cannot contain any condition and will be executed when all the previous if and else if conditions failed to be met.
+            </p>
+           
+            <br />
+
+            <div style="width:60%; margin-top: 10px; margin-bottom:10px;">
+<textarea id="code3" name="code" readonly="readonly" style="width:60%;">var a = 0 if a == 4 a = 10 else a = 5 return a // returns 5</textarea>
+            </div>
+            <br />
+        </div>
+</RadzenCard>
+
+</div>
+
+
+@code {
+    [Inject] private IJSRuntime _js { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        //await _js.InvokeVoidAsync("highlightSnippet");
+        if(firstRender)
+        {
+            var output = await _js.InvokeAsync<string>("highlightSnippet");
+            var output2 = await _js.InvokeAsync<string>("highlightSnippet2");
+            var output3 = await _js.InvokeAsync<string>("highlightSnippet3");
+            await InvokeAsync( StateHasChanged );
+        }
+
+    }
+}

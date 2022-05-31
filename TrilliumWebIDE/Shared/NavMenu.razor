@@ -4,7 +4,9 @@
 <div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="">Trillium Web IDE (tIDE)</a>
-       
+       <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
     </div>
 </div>
 
@@ -36,18 +38,14 @@
                         <RadzenPanelMenuItem Text="Logical" Path="/trilliumlogical"></RadzenPanelMenuItem>
                         <RadzenPanelMenuItem Text="Bitwise" Path="/trilliumbitwise"></RadzenPanelMenuItem>
                 </RadzenPanelMenuItem>
-                <RadzenPanelMenuItem Text="Statement Types" Path="tabs">
+                <RadzenPanelMenuItem Text="Statement Types">
                     <RadzenPanelMenuItem Text="If" Path="/trilliumif"></RadzenPanelMenuItem>
                         <RadzenPanelMenuItem Text="While" Path="/trilliumwhile"></RadzenPanelMenuItem>
                         <RadzenPanelMenuItem Text="For" Path="/trilliumfor"></RadzenPanelMenuItem>
                         <RadzenPanelMenuItem Text="Do While" Path="/trilliumdowhile"></RadzenPanelMenuItem>
                 </RadzenPanelMenuItem>
-                <RadzenPanelMenuItem Text="Functions" Path="tabs">
-                    <RadzenPanelMenuItem Text="Void Functions" Path="/trilliumvoid"></RadzenPanelMenuItem>
-                    <RadzenPanelMenuItem Text="Type Functions" Path="/trilliumtype"></RadzenPanelMenuItem>
-                </RadzenPanelMenuItem>
             </RadzenPanelMenuItem>
-            <RadzenPanelMenuItem Text="Trillium NFTs" Icon="widgets">
+            <RadzenPanelMenuItem Text="Trillium Smart Contracts (SENs)" Icon="widgets">
                     <RadzenPanelMenuItem Text="Base NFT" Path="/trilliumbase"></RadzenPanelMenuItem>
                     <RadzenPanelMenuItem Text="Royalty NFT" Path="/trilliumroyalty"></RadzenPanelMenuItem>
                     <RadzenPanelMenuItem Text="Evolving NFT" Path="/trilliumevolve"></RadzenPanelMenuItem>

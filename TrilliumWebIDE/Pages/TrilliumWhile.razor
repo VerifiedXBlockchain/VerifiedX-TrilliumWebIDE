@@ -1,0 +1,51 @@
+﻿@page "/trilliumwhile"
+
+<div class="row-cols-md-8">
+    <RadzenCard class="m-1" style="margin-bottom: 15px !important;">
+        <h3 class="h3" style="color:darkturquoise;">While Statements in Trillium</h3>
+        <div class="row">
+                <p>
+                    In Trillium the while loop will repeatedly execute a block of code as long as the specified condition stays true.
+                </p>
+                <br />
+                <p>
+                    The while loop starts with the while keyword, and it must include a boolean conditional expression
+                    that returns either true or false (this does not mean a literal true or false). 
+                    It executes the code block until the specified conditional expression yields false.
+                </p>
+
+        </div>
+    </RadzenCard>
+    <RadzenCard class="m-1" style="margin-bottom: 15px !important;">
+        <h3 class="h3" style="color:darkturquoise;">While Loops Explained</h3>
+        <div class="row">
+            <br />
+            <p>
+                When using the while loop, initialization should be done before the loop starts, and increment or decrement steps should be inside the loop.
+            </p>
+           
+            <br />
+                        <div style="width:60%; margin-top: 10px; margin-bottom:10px;">
+<textarea id="code" name="code" readonly="readonly" style="width:60%;">@(@"var i = 0 while i < 5 { i = i + 1 if i == 5 continue } return i //returns 5")</textarea>
+            </div>
+        </div>
+    </RadzenCard>
+
+
+</div>
+
+
+@code {
+    [Inject] private IJSRuntime _js { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        //await _js.InvokeVoidAsync("highlightSnippet");
+        if(firstRender)
+        {
+            var output = await _js.InvokeAsync<string>("highlightSnippet");
+            await InvokeAsync( StateHasChanged );
+        }
+
+    }
+}

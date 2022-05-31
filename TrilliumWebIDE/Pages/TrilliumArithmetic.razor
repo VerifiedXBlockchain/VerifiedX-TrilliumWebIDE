@@ -86,8 +86,6 @@
         if(firstRender)
         {
             var output = await _js.InvokeAsync<string>("highlightSnippet");
-            var output2 = await _js.InvokeAsync<string>("highlightSnippet2");
-            var output3 = await _js.InvokeAsync<string>("highlightSnippet3");
             await InvokeAsync( StateHasChanged );
         }
 

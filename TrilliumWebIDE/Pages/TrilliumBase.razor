@@ -1,0 +1,89 @@
+﻿@page "/trilliumbase"
+
+<div class="row-cols-md-8">
+
+
+    <RadzenCard class="m-1" style="margin-bottom: 15px !important;">
+        <h3 class="h3" style="color:darkturquoise;">How to Make a Base NFT</h3>
+        <video class="w-100" id="tintrovideo" style="max-width: 1400px;" controls="controls" _bl_796fa517-712e-4cf5-b8d6-7a4d940f2947="">
+            <source src="videos/trillbasesc.mp4" type="video/mp4">
+        </video>
+    </RadzenCard>
+    <RadzenCard class="m-1" style="margin-bottom: 15px !important;">
+        <h3 class="h3" style="color:darkturquoise;">Base NFT Code</h3>
+        <div class="row">
+            <div style="width:90%;">
+<textarea id="code" name="code" readonly="readonly" style="width:60%;">let Name = "Trillium NFT"
+let Description = "The First NFT From Trillium for RBX"
+let Address = "Rxxx"
+let MinterAddress = "Rxxx"
+let MinterName = "Any Name"
+let SmartContractUID = "assign"
+let Signature = "Insert Signature"
+let Features = ""
+let Extension = "jpg"
+let FileSize = "2"
+let Location = "D:/Trillium.jpg"
+let FileName = "Trillium.jpg"
+let AssetAuthorName = "T-Real-Ium"
+
+function NftMain(data : string) : string
+{
+  if data == "nftdata"
+  {
+    return GetNFTData(Name, Description, Address, MinterAddress)
+  }
+  else if data == "getnftassetdata"
+  {
+    return GetNFTAssetData(FileName, Location, FileSize, Extension, AssetAuthorName)
+  }
+
+  return "No Method Named " + data + " was found."
+}
+
+function GetNFTData(name : string, desc : string, addr : string, mintAddr: string) : string
+{
+  return name + "|->" + desc + "|->" + addr + "|->" + mintAddr
+}
+
+function GetNFTAssetData(fileName : string, loc : string, fileSize : string, ext : string, assetAuthor : string) : string
+{
+  return (fileName + "|->" + loc + "|->" + fileSize + "|->" + ext + "|->" + assetAuthor)
+}
+
+function GetNFTId() : string
+{
+  return SmartContractUID
+}
+
+function GetNFTFeatures() : string
+{
+  return Features
+}
+
+function GetNFTSignature() : string
+{
+  return Signature
+}
+</textarea>
+            </div>
+            <br />
+        </div>
+    </RadzenCard>
+</div>
+
+
+@code {
+    [Inject] private IJSRuntime _js { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        //await _js.InvokeVoidAsync("highlightSnippet");
+        if(firstRender)
+        {
+            var output = await _js.InvokeAsync<string>("highlightSnippet");
+            await InvokeAsync( StateHasChanged );
+        }
+
+    }
+}
