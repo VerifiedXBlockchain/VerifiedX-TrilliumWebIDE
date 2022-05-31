@@ -10,13 +10,16 @@
 
 <TrilliumWebIDE.Pages.Components.ToggleMenuBotton></TrilliumWebIDE.Pages.Components.ToggleMenuBotton>
 
-<RadzenSplitter Orientation="Orientation.Vertical" Collapse=@OnCollapse Expand=@OnExpand style="height: 100%; border: 5px solid rgba(132,233,253,.8);">
+<RadzenSplitter Orientation="Orientation.Vertical" Collapse=@OnCollapse Expand=@OnExpand style="height: 100%; border: 5px solid rgba(255,255,255,.1);">
         <RadzenSplitterPane Size="100%">
             <RadzenSplitter Collapse=@OnCollapse Expand=@OnExpand>
                 <RadzenSplitterPane Size="50%" Min="30px" Max="70%" Collapsible="false">
                     <h2 style="margin-left: 15px; margin-top:10px;">Run</h2>
-                    <RadzenButton style="margin-left: 15px;" Click=@(args => RunCode())  MouseEnter="@(args => ShowTooltip(args, new TooltipOptions(){ Duration = 7000 }) )">Compile/Run</RadzenButton>
-                    <RadzenTextBox style="margin-left: 15px; margin-top:10px;" TValue="string" @bind-Value=@CodeToRun Name=""/>
+                    <div class="d-flex align-items-end justify-content-between">
+
+                    <RadzenTextBox class="code-input" TValue="string" @bind-Value=@CodeToRun Name=""/>
+                    <RadzenButton style="margin-right:15px; background-color: #00bc8c;" Click=@(args => RunCode())  MouseEnter="@(args => ShowTooltip(args, new TooltipOptions(){ Duration = 7000 }) )">Compile/Run</RadzenButton>
+                    </div>
                     <RadzenCard class="m-3">
                      <div style="height:100%;" id="divCode">
                          <textarea id="code" name="code">
@@ -54,7 +57,7 @@ function helloWorld(name : string) : string
                 </RadzenSplitterPane>
                 <RadzenSplitterPane Collapsible="false">
                     <h2 style="margin-left: 15px;  margin-top:17px;">Results</h2>
-                    <RadzenButton ButtonStyle="ButtonStyle.Warning" style="margin-left: 15px;">Clear</RadzenButton>
+                    <RadzenButton ButtonStyle="ButtonStyle.Warning" style="margin-left: 15px; background-color: #031745">Clear</RadzenButton>
                     <RadzenCard class="m-3">    
                         <div>
                             <p><span style="color: gold;">@runResultsDate</span><span style="color: greenyellow;">@runResults</span></p>

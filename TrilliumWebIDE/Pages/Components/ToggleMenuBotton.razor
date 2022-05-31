@@ -4,11 +4,11 @@
 
 @if (ViewOption.IsNavigationVisible)
 {
-    <button @onclick="ViewOption.Toggle" class="btn btn-primary"  style="margin-left: 0px; margin-top:-20px;margin-bottom:5px; background-color:aquamarine; color:darkgray;"><span class="oi oi-collapse-left" aria-hidden="true"></span> Hide Menu</button>
+    <button @onclick="ViewOption.Toggle" class="btn btn-dark btn-sm"  style="margin-left: 0px; margin-top:-20px;margin-bottom:5px;"><span class="oi oi-collapse-left" aria-hidden="true"></span> Hide Menu</button>
 }
 else
 {
-    <button @onclick="ViewOption.Toggle"  class="btn btn-primary" style="margin-left: 0px; margin-top:-20px;margin-bottom:5px; background-color:aquamarine; color:darkgray;"><span class="oi oi-collapse-right" aria-hidden="true"></span> Show Menu</button>
+    <button @onclick="ViewOption.Toggle"  class="btn btn-dark btn-sm" style="margin-left: 0px; margin-top:-20px;margin-bottom:5px;"><span class="oi oi-collapse-right" aria-hidden="true"></span> Show Menu</button>
 }
 
 

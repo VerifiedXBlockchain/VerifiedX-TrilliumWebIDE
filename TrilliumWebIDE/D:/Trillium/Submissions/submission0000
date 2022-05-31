@@ -1,0 +1,29 @@
+function helloWorld(name : string) : string
+{
+    var result = "Hello " + name
+    return result
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
