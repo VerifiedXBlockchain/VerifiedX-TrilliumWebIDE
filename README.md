@@ -16,6 +16,7 @@
 
 Trillium is the smart contract language that will be powering our smart contracts. This is a from scratch language that has roots from C#, C, and some Javascript.
 
+# tIDE - The Trillium Browser Based IDE
 
 # License
 
