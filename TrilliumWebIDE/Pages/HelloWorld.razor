@@ -1,0 +1,129 @@
+﻿@page "/helloworld"
+
+<div class="row-cols-md-8">
+    <RadzenCard class="m-1" style="margin-bottom: 15px !important;">
+        <h3 class="h3" style="color:darkturquoise;">Writing Your First Program</h3>
+        <div class="row">
+                <p>
+                    Below we will go step by step on how to compile your first program!
+                </p>
+                <br />
+                <p>
+                    In this example we will be creating a hellow world program that will accept a type string 'name' and it will return a type of string.
+                </p>
+        </div>
+    </RadzenCard>
+    <RadzenCard class="m-1" style="margin-bottom: 15px !important;">
+        <h3 class="h3" style="color:darkturquoise;">Step 1: Create the function</h3>
+        <div class="row">
+            <br />
+            <p>
+                Below we will create the function for your first program
+            </p>
+           
+            <br />
+
+
+            <div style="width:60%; margin-top: 10px; margin-bottom:10px;">
+<textarea id="code" name="code" readonly="readonly" style="width:60%;">
+function helloWorld(name : string) : string
+{
+    
+}</textarea>
+            </div>
+            <br />
+            <br />
+            <p>
+                In this example we have created a function called helloWorld. This function accepts a type <span style="color:darkturquoise;">'string'</span> and 
+                is called <span style="color:darkturquoise;">'name'</span>. It will also return a type of string
+                which is indicated at the end of the closed parenthesis <span style="color:darkturquoise;">') : string'</span>
+            </p>
+        </div>
+    </RadzenCard>
+
+        <RadzenCard class="m-1" style="margin-bottom: 15px !important;">
+        <h3 class="h3" style="color:darkturquoise;">Step 2: Create return string variable</h3>
+        <div class="row">
+            <br />
+            <p>
+                Below we will take the variable passed into function and store it in a string to later be returned.
+                We have also added the string "Hello " at the beginning of the variable named 'result' to make the final result say 'Hello {SomeName}'
+            </p>
+           
+            <br />
+
+            <div style="width:60%; margin-top: 10px; margin-bottom:10px;">
+<textarea id="code2" name="code" readonly="readonly" style="width:60%;">
+function helloWorld(name : string) : string
+{
+    var result = "Hello " + name
+}</textarea>
+            </div>
+            <br />
+            <br />
+            <p>
+                In this example we have created a function called helloWorld. This function accepts a type <span style="color:darkturquoise;">'string'</span> and 
+                is called <span style="color:darkturquoise;">'name'</span>. It will also return a type of string
+                which is indicated at the end of the closed parenthesis <span style="color:darkturquoise;">') : string'</span>. This function also now stores the variable name
+                that is passed into it into the variable 'result'.
+            </p>
+        </div>
+    </RadzenCard>
+
+            <RadzenCard class="m-1" style="margin-bottom: 15px !important;">
+        <h3 class="h3" style="color:darkturquoise;">Step 3: Return the String</h3>
+        <div class="row">
+            <br />
+            <p>
+                Below we will take the variable passed into function and store it in a string to later be returned.
+                We have also added the string "Hello " at the beginning of the variable named 'result' to make the final result say 'Hello {SomeName}'
+                We will now return that result.
+            </p>
+           
+            <br />
+
+            <div style="width:60%; margin-top: 10px; margin-bottom:10px;">
+<textarea id="code3" name="code" readonly="readonly" style="width:60%;">
+function helloWorld(name : string) : string
+{
+    var result = "Hello " + name
+    return result
+}</textarea>
+            </div>
+            <br />
+            <br />
+            <p>
+                In this example we have created a function called helloWorld. This function accepts a type <span style="color:darkturquoise;">'string'</span> and 
+                is called <span style="color:darkturquoise;">'name'</span>. It will also return a type of string
+                which is indicated at the end of the closed parenthesis <span style="color:darkturquoise;">') : string'</span>. This function also now stores the variable name
+                that is passed into it into the variable 'result'. We now when the method is called it will return the variable 'result'
+            </p>
+        </div>
+    </RadzenCard>
+    <br />
+    <RadzenCard class="m-1" style="margin-bottom: 15px !important;">
+        <h3 class="h3" style="color:darkturquoise;">Video Intro to Web IDE</h3>
+        <video class="w-100" id="tintrovideo" style="max-width: 800px;" controls="controls" _bl_796fa517-712e-4cf5-b8d6-7a4d940f2947="">
+            <source src="videos/tintro.mp4" type="video/mp4">
+        </video>
+    </RadzenCard>
+
+</div>
+
+
+@code {
+    [Inject] private IJSRuntime _js { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        //await _js.InvokeVoidAsync("highlightSnippet");
+        if(firstRender)
+        {
+            var output = await _js.InvokeAsync<string>("highlightSnippet");
+            var output2 = await _js.InvokeAsync<string>("highlightSnippet2");
+            var output3 = await _js.InvokeAsync<string>("highlightSnippet3");
+            await InvokeAsync( StateHasChanged );
+        }
+
+    }
+}

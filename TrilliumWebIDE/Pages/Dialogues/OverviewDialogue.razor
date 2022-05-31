@@ -1,0 +1,43 @@
+﻿@page "/overviewss"
+
+@inject DialogService dialogService
+
+<div class="row">
+    <RadzenCard class="m-1">
+            <h3 class="h5">Trillium</h3>
+            <div class="d-flex flex-row">
+                <div>
+                    <p>
+                        Trillium was created to facilitate the growing demand for new types of NFTs beyond their current scope.
+                    </p>
+                    <p>
+                        Trillium was designed with NFTs specifically in mind and is a turing complete language. 
+                    </p>
+                </div>
+            </div>
+    </RadzenCard>
+    <RadzenCard class="m-1">
+            <h3 class="h5">What is the Web IDE ?</h3>
+            <div class="row">
+                <p>
+                    The Web IDE was designed for you to test out your Trillium code and see what all you can create in an 
+                    easy to use environment with all the information readily available to you.
+                </p>
+                <br />
+                <br />
+                <p>
+                    The Web IDE will also have many features coming like shared repos, saving trlm sketches, 
+                    and even chat to get help from users around the world!
+                </p>
+            </div>
+    </RadzenCard>
+</div>
+<div class="row">
+    <div class="col-md-12 text-right">
+        <RadzenButton Click="@((args) => dialogService.Close(true))" Text="Close" Style="width: 120px" />
+    </div>
+</div>
+
+@code {
+
+}

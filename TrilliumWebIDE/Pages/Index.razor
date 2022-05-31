@@ -1,0 +1,226 @@
+﻿@page "/"
+@using System.Text.RegularExpressions;
+@using System.Text
+@using TrilliumWebIDE.Service;
+@inject TrilliumService _trilliumService
+@inject NotificationService NotificationService
+@inject TooltipService tooltipService
+
+<PageTitle>Trillium Web IDE</PageTitle>
+
+<TrilliumWebIDE.Pages.Components.ToggleMenuBotton></TrilliumWebIDE.Pages.Components.ToggleMenuBotton>
+
+<RadzenSplitter Orientation="Orientation.Vertical" Collapse=@OnCollapse Expand=@OnExpand style="height: 100%; border: 5px solid rgba(132,233,253,.8);">
+        <RadzenSplitterPane Size="100%">
+            <RadzenSplitter Collapse=@OnCollapse Expand=@OnExpand>
+                <RadzenSplitterPane Size="50%" Min="30px" Max="70%" Collapsible="false">
+                    <h2 style="margin-left: 15px; margin-top:10px;">Run</h2>
+                    <RadzenButton style="margin-left: 15px;" Click=@(args => RunCode())  MouseEnter="@(args => ShowTooltip(args, new TooltipOptions(){ Duration = 7000 }) )">Compile/Run</RadzenButton>
+                    <RadzenTextBox style="margin-left: 15px; margin-top:10px;" TValue="string" @bind-Value=@CodeToRun Name=""/>
+                    <RadzenCard class="m-3">
+                     <div style="height:100%;" id="divCode">
+                         <textarea id="code" name="code">
+function helloWorld(name : string) : string
+{
+    var result = "Hello " + name
+    return result
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</textarea></div>
+                    </RadzenCard>
+                </RadzenSplitterPane>
+                <RadzenSplitterPane Collapsible="false">
+                    <h2 style="margin-left: 15px;  margin-top:17px;">Results</h2>
+                    <RadzenButton ButtonStyle="ButtonStyle.Warning" style="margin-left: 15px;">Clear</RadzenButton>
+                    <RadzenCard class="m-3">    
+                        <div>
+                            <p><span style="color: gold;">@runResultsDate</span><span style="color: greenyellow;">@runResults</span></p>
+                        </div>
+                    </RadzenCard>
+                </RadzenSplitterPane>
+            </RadzenSplitter>
+        </RadzenSplitterPane>
+</RadzenSplitter>
+
+
+@code {
+    [Inject] private IJSRuntime _js { get; set; }
+    public string runResults { get; set; }
+    public string runResultsDate { get; set; }
+    public string CodeToRun { get; set; }
+    public string runValue { get; set; }
+    bool isLoaded = false;
+    string hidden = "hidden"; 
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        //await _js.InvokeVoidAsync("highlightSnippet");
+        if(firstRender)
+        {
+            CodeToRun = (@"helloWorld(""Trillium"")");
+            var output = await _js.InvokeAsync<string>("highlightSnippet");
+            hidden = "";
+            isLoaded = true;
+            await InvokeAsync( StateHasChanged );
+
+        }
+
+    }
+    void ShowTooltip(ElementReference elementReference, TooltipOptions options = null) => tooltipService.Open(elementReference, "Click this button to compile and run Trillium code", options);
+
+    private async Task RunCode()
+    {
+        var code = await _js.InvokeAsync<string>(@"elementId");
+        int timeDiffer = await _js.InvokeAsync<int>(@"GetTimezoneValue");
+        var userTime = TimeSpan.FromMinutes(-timeDiffer);
+        var localTime = DateTimeOffset.UtcNow.ToOffset(userTime);
+        var newString = string.Join(" ", Regex.Split(code, @"(?:\r\n|\n|\r)"));
+        var codeToRun = CodeToRun;
+        bool runResult = true;
+        var repl = _trilliumService.TrillRepl();
+        repl.Run("#reset");
+        var compile = repl.Run(code.ToString());
+        var result = repl.Run(codeToRun);
+        if(compile != null)
+        {
+            if(compile.Diagnostics.Count() == 0)
+            {
+                var resultStr = "[" + localTime.ToString() + "]: ";
+                runResultsDate = resultStr;
+                runResults = "Code Compiled Successfully.";
+                var message = new NotificationMessage
+                {
+                    Detail = "Successful Compile!",
+                    Duration = 7000,
+                    Severity = NotificationSeverity.Success,
+                    Summary = "Your code has successfully compiled!",
+                };
+                NotificationService.Notify(message);
+            }
+            else
+            {
+                runResult = false;
+                var resultStr = "[" + localTime.ToString() + "]: ";
+                var diagCount = compile.Diagnostics.Count() - 1;
+                StringBuilder strBld = new StringBuilder();
+
+                var message = new NotificationMessage
+                {
+                    Detail = "Fail!",
+                    Duration = 7000,
+                    Severity = NotificationSeverity.Error,
+                    Summary = "Your code has failed to compile!",
+                };
+                NotificationService.Notify(message);
+
+                foreach(var diag in compile.Diagnostics)
+                {
+                    var diagLine = "ERROR - " + "Line: (" + (diag.Location.StartLine + 1).ToString() + ")" + " Message: " + diag.Message;
+                    strBld.AppendLine(diagLine);
+                }
+                runResults = strBld.ToString();
+            }
+            if(result != null)
+            {
+                if(runResult == true)
+                {
+                    if(result.Value != null)
+                    {
+                        var resultStr = "[" + localTime.ToString() + "]: ";
+                        if(result.Value != "")
+                        {
+                            var message = new NotificationMessage
+                            {
+                                Detail = "Successful Execute!",
+                                Duration = 7000,
+                                Severity = NotificationSeverity.Success,
+                                Summary = "Your code has successfully executed (Ran)!",
+                            };
+                            NotificationService.Notify(message);
+                            runResultsDate = resultStr;
+                            runResults = result.Value.ToString();
+                        }
+                        else
+                        {
+                            runResultsDate = resultStr;
+                            runResults = "Code Compiled Successfully.";
+                        }
+
+                        await InvokeAsync( StateHasChanged );
+                    }
+                    else
+                    {
+                        var resultStr = "[" + localTime.ToString() + "]: ";
+                        var diagCount = result.Diagnostics.Count() - 1;
+                        StringBuilder strBld = new StringBuilder();
+
+                        var message = new NotificationMessage
+                        {
+                            Detail = "Fail!",
+                            Duration = 7000,
+                            Severity = NotificationSeverity.Error,
+                            Summary = "Your code has failed to execute (Run)!",
+                        };
+                        NotificationService.Notify(message);
+
+                        foreach(var diag in result.Diagnostics)
+                        {
+                            var diagLine = "ERROR - " + "Line: (" + (diag.Location.StartLine + 1).ToString() + ")" + " Message: " + diag.Message;
+                            strBld.AppendLine(diagLine);
+                        }
+                        runResults = strBld.ToString();
+                    }
+                }
+                runResult = true;
+
+            }
+        }
+        else
+        {
+            runResults = "Please add code before trying to run.";
+        }
+
+    }
+
+    private async Task CopyValue()
+    {
+        //var bob = await _js.InvokeAsync<string>(@"elementId");
+        //var newString = string.Join(" ", Regex.Split(bob, @"(?:\r\n|\n|\r)"));
+        //codeResults = bob;
+        //await InvokeAsync( StateHasChanged );
+    }
+
+    void OnCollapse(RadzenSplitterEventArgs args)
+    {
+        //console.Log($"Pane {args.PaneIndex} Collapse");
+    }
+
+    void OnExpand(RadzenSplitterEventArgs args)
+    {
+        //console.Log($"Pane {args.PaneIndex} Expand");
+    }
+
+}

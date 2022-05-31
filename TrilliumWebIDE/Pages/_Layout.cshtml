@@ -1,0 +1,152 @@
+﻿@using Microsoft.AspNetCore.Components.Web
+@namespace TrilliumWebIDE.Pages
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <base href="~/" />
+    <link rel="icon" type="image/x-icon" href="images/rbx.ico">
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
+    <link href="css/site.css" rel="stylesheet" />
+    <link href="codemirror/css/codemirror.css" rel="stylesheet" />
+    <link href="codemirror/css/monokai.css" rel="stylesheet" />
+    <link href="TrilliumWebIDE.styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="_content/Radzen.Blazor/css/dark.css">
+    <component type="typeof(HeadOutlet)" render-mode="ServerPrerendered" />
+</head>
+<body class="area">
+@*        <div class='light x1'></div>
+  <div class='light x2'></div>
+  <div class='light x3'></div>
+  <div class='light x4'></div>
+  <div class='light x5'></div>
+  <div class='light x6'></div>
+  <div class='light x7'></div>
+  <div class='light x8'></div>
+  <div class='light x9'></div>*@
+  <ul class="circles">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+            </ul>
+
+    @RenderBody()
+
+            
+    
+    <div id="blazor-error-ui">
+        <environment include="Staging,Production">
+            An error has occurred. This application may no longer respond until reloaded.
+        </environment>
+        <environment include="Development">
+            An unhandled exception has occurred. See browser dev tools for details.
+        </environment>
+        <a href="" class="reload">Reload</a>
+        <a class="dismiss">🗙</a>
+    </div>
+
+    <script src="_framework/blazor.server.js"></script>
+    <script src="codemirror/js/codemirror.js"></script>
+    <script src="codemirror/js/comment.js"></script>
+    <script src="codemirror/js/continuecomment.js"></script>
+    <script src="codemirror/js/javascript.js"></script>
+    <script src="codemirror/js/matchbrackets.js"></script>
+    <script src="_content/Radzen.Blazor/Radzen.Blazor.js"></script>
+
+    <script>
+        var globalVariable;
+        window.highlightSnippet = function(){
+            var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+			  lineNumbers: true,
+			  matchBrackets: true,
+			  continueComments: "Enter",
+			  theme: "monokai",
+			  extraKeys: {"Ctrl-Q": "toggleComment"}
+			});
+
+            globalVariable = editor;
+        }
+
+        window.highlightSnippet2 = function(){
+            var editor = CodeMirror.fromTextArea(document.getElementById("code2"), {
+			  lineNumbers: true,
+			  matchBrackets: true,
+			  continueComments: "Enter",
+			  theme: "monokai",
+			  extraKeys: {"Ctrl-Q": "toggleComment"}
+			});
+        }
+
+        window.highlightSnippet3 = function(){
+            var editor = CodeMirror.fromTextArea(document.getElementById("code3"), {
+			  lineNumbers: true,
+			  matchBrackets: true,
+			  continueComments: "Enter",
+			  theme: "monokai",
+			  extraKeys: {"Ctrl-Q": "toggleComment"}
+			});
+        }
+
+        function elementId() {
+            // Get element with the specified ID name
+            var test = globalVariable.getValue();
+            var idValue = document.getElementById("divCode");
+            console.log(idValue.innerHTML);
+            //return idValue.innerText;
+            return test;
+        }
+
+        function GetTimezoneValue() {
+             // Returns the time difference in minutes between UTC time and local time.
+             return new Date().getTimezoneOffset();
+         }
+
+
+    </script>
+
+    <script>
+    function backgroundVideo() {
+
+       $("video source").each(function () {
+          var sourceFile = $(this).attr("data-src");
+          $(this).attr("src", sourceFile);
+          var video = this.parentElement;
+          video.load();
+       });
+
+    }
+    window.onload = backgroundVideo;
+</script>
+<style>
+  .jumbotron {
+     background-color: #454545;
+   }
+
+  .jumbotron .hero-section {
+      position: fixed;
+      z-index: 1;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.6;
+      background: black;
+   }
+
+  .jumbotron .container {
+      z-index: 2;
+      position: relative;
+   }  
+</style>
+</body>
+</html>

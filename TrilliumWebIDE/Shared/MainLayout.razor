@@ -1,0 +1,35 @@
+﻿@inherits LayoutComponentBase
+@using TrilliumWebIDE.Service;
+
+@inject ViewOptionService ViewOption
+<PageTitle>TrilliumWebIDE</PageTitle>
+
+<div class="page">
+    <div class="sidebar @ViewOption.NavBarClass">
+        <NavMenu />
+    </div>
+
+    <main>
+        <div class="top-row px-4 auth" style="background-color: #1b6ec2;">
+            <LoginDisplay />
+            @*<a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>*@
+        </div>
+        <RadzenDialog/>
+<RadzenNotification/>
+<RadzenContextMenu/>
+<RadzenTooltip/>
+        <article class="content px-4">
+            @Body
+        </article>
+    </main>
+</div>
+
+@code {
+
+    protected override async Task OnInitializedAsync()
+    {
+        ViewOption.OnChanged = () => { 
+            StateHasChanged();//Refresh
+        };
+    }
+}

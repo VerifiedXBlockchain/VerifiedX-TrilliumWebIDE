@@ -1,0 +1,87 @@
+﻿@using TrilliumWebIDE.Pages.Dialogues
+@inject DialogService dialogService
+
+<div class="top-row ps-3 navbar navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="">Trillium Web IDE (tIDE)</a>
+       
+    </div>
+</div>
+
+<div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
+     <RadzenPanelMenu>
+            <RadzenPanelMenuItem Text="Home" Path="/" Icon="home"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="tIDE Overview" Path="/overview" Icon="info"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Introduction to Trillium" Icon="filter_vintage">
+                <RadzenPanelMenuItem Text="What is Trillium?" Path="/whatistrillium"></RadzenPanelMenuItem>
+                <RadzenPanelMenuItem Text="How Does Trillium Work with RBX?" Path="/trilliumrbx"></RadzenPanelMenuItem>
+            
+                <RadzenPanelMenuItem Text="Getting Started">
+                    <RadzenPanelMenuItem Text="Console IDE" Path="/consoleide"></RadzenPanelMenuItem>
+                    <RadzenPanelMenuItem Text="Web IDE" Path="/webide"></RadzenPanelMenuItem>
+                    <RadzenPanelMenuItem Text="Running Your First Program" Path="/helloworld"></RadzenPanelMenuItem>
+                </RadzenPanelMenuItem>
+            </RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Trillium Overview" Icon="code">
+                <RadzenPanelMenuItem Text="Variable Types" Path="tabs">
+                        <RadzenPanelMenuItem Text="String"></RadzenPanelMenuItem>
+                        <RadzenPanelMenuItem Text="Boolean"></RadzenPanelMenuItem>
+                        <RadzenPanelMenuItem Text="Int"></RadzenPanelMenuItem>
+                        <RadzenPanelMenuItem Text="Decimal"></RadzenPanelMenuItem>
+                        <RadzenPanelMenuItem Text="Date"></RadzenPanelMenuItem>
+                </RadzenPanelMenuItem>
+                <RadzenPanelMenuItem Text="Operators">
+                        <RadzenPanelMenuItem Text="Arithmetic"></RadzenPanelMenuItem>
+                        <RadzenPanelMenuItem Text="Relational"></RadzenPanelMenuItem>
+                        <RadzenPanelMenuItem Text="Logical"></RadzenPanelMenuItem>
+                        <RadzenPanelMenuItem Text="Assignment"></RadzenPanelMenuItem>
+                        <RadzenPanelMenuItem Text="Bitwise"></RadzenPanelMenuItem>
+                        <RadzenPanelMenuItem Text="Miscellaneous"></RadzenPanelMenuItem>
+                </RadzenPanelMenuItem>
+                <RadzenPanelMenuItem Text="Statement Types" Path="tabs">
+                    <RadzenPanelMenuItem Text="If"></RadzenPanelMenuItem>
+                        <RadzenPanelMenuItem Text="While"></RadzenPanelMenuItem>
+                        <RadzenPanelMenuItem Text="For"></RadzenPanelMenuItem>
+                        <RadzenPanelMenuItem Text="Do While"></RadzenPanelMenuItem>
+                </RadzenPanelMenuItem>
+                <RadzenPanelMenuItem Text="Functions" Path="tabs">
+                    <RadzenPanelMenuItem Text="Void Functions"></RadzenPanelMenuItem>
+                    <RadzenPanelMenuItem Text="Type Functions"></RadzenPanelMenuItem>
+                </RadzenPanelMenuItem>
+            </RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Trillium NFTs" Icon="widgets">
+                    <RadzenPanelMenuItem Text="Base NFT"></RadzenPanelMenuItem>
+                    <RadzenPanelMenuItem Text="Royalty NFT"></RadzenPanelMenuItem>
+                    <RadzenPanelMenuItem Text="Evolving NFT"></RadzenPanelMenuItem>
+                    <RadzenPanelMenuItem Text="Multi-Asset NFT"></RadzenPanelMenuItem>
+                    <RadzenPanelMenuItem Text="More Examples Coming..."></RadzenPanelMenuItem>
+            </RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="GitHub" Icon="data_object">
+                    <RadzenPanelMenuItem Text="ReserveBlock Core" Path="https://github.com/ReserveBlockIO/ReserveBlock-Core" Target="_blank"></RadzenPanelMenuItem>
+                    <RadzenPanelMenuItem Text="Trillium" Path="https://github.com/ReserveBlockIO/Trillium" Target="_blank"></RadzenPanelMenuItem>
+                    <RadzenPanelMenuItem Text="Trillium Web IDE (tIDE)" Path="https://github.com/ReserveBlockIO/TrilliumWebIDE" Target="_blank"></RadzenPanelMenuItem>
+                    <RadzenPanelMenuItem Text="ReserveBlock Core GUI" Path="https://github.com/ReserveBlockIO/rbx-wallet-gui" Target="_blank"></RadzenPanelMenuItem>
+            </RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Discord" Path="https://discord.gg/PnS2HRETDh" Icon="sports_esports" Target="_blank"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="RBX Website" Path="https://reserveblock.io" Icon="view_in_ar" Target="_blank"></RadzenPanelMenuItem>
+    </RadzenPanelMenu>
+    <RadzenImage Path="images/rbx-cube-transparent.png" Style="width: 60%; margin: 3rem;" />
+</div>
+
+@code {
+    private bool collapseNavMenu = true;
+
+    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+    private void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    }
+
+    private async Task OpenOverview()
+    {
+        await dialogService.OpenAsync<OverviewDialogue>("Overview",
+               new Dictionary<string, object>(),
+               new DialogOptions() { Width = "700px", Height = "570px", Resizable = true, Draggable = true });
+    }
+}

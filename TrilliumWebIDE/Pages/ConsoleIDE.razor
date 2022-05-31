@@ -1,0 +1,120 @@
+﻿@page "/consoleide"
+
+<div class="row-cols-md-8">
+    <RadzenCard class="m-1" style="margin-bottom: 15px !important;">
+        <h3 class="h3" style="color:darkturquoise;">Trillium Console IDE</h3>
+        <div class="row">
+            <div>
+                <p>
+                    Trillium can be tested on desktop with the consle IDE.
+                </p>
+                <br />
+                <p>
+                    The follow environments are comptable with the Console IDE. Any environment that can run .net core 6 (which is them all) can run our IDE.
+                </p>
+                <br />
+                <ul>
+                    <li>
+                        Windows 
+                    </li>
+                    <li>
+                        MacOS 
+                    </li>
+                    <li>
+                        Linux 
+                    </li>
+                </ul>
+                <br />
+                 <p>
+                    To run the code you must meet the following requirements: 
+                </p>
+                 <br />
+                <ul>
+                    <li>
+                        Visual Studio 2022 - <RadzenLink Path="https://visualstudio.microsoft.com/vs/" Text="Get Visual Studio" target="_blank" />
+                    </li>
+                    <li>
+                        .Net Core 6 - <RadzenLink Path="https://dotnet.microsoft.com/en-us/download/dotnet/6.0" Text="Get .Net Core 6" target="_blank" />
+                    </li>
+                </ul>
+                <br />
+            </div>
+        </div>
+    </RadzenCard>
+    <RadzenCard class="m-1" style="margin-bottom: 15px !important;">
+        <h3 class="h3" style="color:darkturquoise;">A Basic Program</h3>
+        <div class="row">
+            <RadzenImage Path="images/trilliumide.png" Style="width: 60%;"></RadzenImage>
+            <br />
+            <p>
+                Above we have a simple 'Hello World' program. The main thing to point out is the console IDE can handle fully typed functions and then call those functions.
+                We have the following things in this program:
+            </p>
+            <br />
+                <ul style="margin-left:17px;">
+                    <li>
+                        Function
+                    </li>
+                    <li>
+                        Function input paramater of a string
+                    </li>
+                    <li>
+                        Function return type of a string
+                    </li>
+                    <li>
+                        variable declaration of a string
+                    </li>
+                    <li>
+                        return of newly declared variable
+                    </li>
+                    <li>
+                        Calling the function of 'helloWorld()' with 'Trillium' as the paramter input.
+                    </li>
+                </ul>
+            <br />
+
+            <div style="width:60%;">
+<textarea id="code" name="code" readonly="readonly" style="width:60%;">
+function helloWorld(name : string) : string
+{
+    var result = "Hello " + name
+    return result
+}</textarea>
+            </div>
+            <br />
+            <br />
+            <p>
+                As seen in the screenshot if you send <span style="color:darkturquoise;">helloWorld("Trillium")'</span> the ide output will be: <span style="color:darkturquoise;">Hello Trillium</span>.
+            </p>
+        </div>
+    </RadzenCard>
+    <RadzenCard class="m-1" style="margin-bottom: 15px !important;">
+        <h3 class="h3" style="color:darkturquoise;">Where can I get the Console IDE?</h3>
+        <div class="row">
+            <p>
+                Trillium, like much of our product line, was written in C#, .net 6, and is on our github.
+                <RadzenLink Path="https://github.com/ReserveBlockIO/Trillium" Text="Go to Trillium" target="_blank" />
+            </p>
+            <br />
+            <p>
+                Trillium Console IDE will also store your submissions until you send a #reset command to clear them giving you flexibility.
+            </p>
+        </div>
+    </RadzenCard>
+</div>
+
+
+@code {
+    [Inject] private IJSRuntime _js { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        //await _js.InvokeVoidAsync("highlightSnippet");
+        if(firstRender)
+        {
+            var output = await _js.InvokeAsync<string>("highlightSnippet");
+            await InvokeAsync( StateHasChanged );
+        }
+
+    }
+}
