@@ -4,7 +4,6 @@
 [![Generic badge](https://img.shields.io/badge/C%23-10%2E0-blue.svg)](https://shields.io/)
 [![Generic badge](https://img.shields.io/badge/%2ENet%20Core-6%2E0-blue.svg)](https://shields.io/)
 
-![license](https://img.shields.io/github/license/ReserveBlockIO/TrilliumWebIDE)
 ![build](https://img.shields.io/github/workflow/status/ReserveBlockIO/TrilliumWebIDE/.NET)
 ![issues](https://img.shields.io/github/issues/ReserveBlockIO/TrilliumWebIDE)
 ![Discord](https://img.shields.io/discord/917499597692211260?label=discord)
@@ -17,6 +16,8 @@
 Trillium is the smart contract language that will be powering our smart contracts. This is a from scratch language that has roots from C#, C, and some Javascript.
 
 # tIDE - The Trillium Browser Based IDE
+
+![image](https://user-images.githubusercontent.com/20599614/171071872-b90465b8-5f28-4332-9ce8-99c678b8f057.png)
 
 # License
 
