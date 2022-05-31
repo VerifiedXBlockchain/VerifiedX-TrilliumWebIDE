@@ -1,0 +1,70 @@
+﻿@page "/trilliumdate"
+
+<div class="row-cols-md-8">
+    <RadzenCard class="m-1" style="margin-bottom: 15px !important;">
+        <h3 class="h3" style="color:darkturquoise;">Dates in Trillium</h3>
+        <div class="row">
+                <p>
+                    Trillium currently will accept a UTC date in Ticks format and then casted to a string.
+                </p>
+                <br />
+                <p>
+                    Trillium will take this date and return a true or false. It will return True if the submitted date has already passed and will return false if the submitted date
+                    is still in the future from the current time. 
+                </p>
+        </div>
+    </RadzenCard>
+    <RadzenCard class="m-1" style="margin-bottom: 15px !important;">
+        <h3 class="h3" style="color:darkturquoise;">Using Dates</h3>
+        <div class="row">
+            <br />
+            <p>
+                Below we show how to use the dateProc("DateTimeInTicks") method. The times used are the following:
+                <ul style="margin-left:18px;">
+                    <li>
+                        5/31/2022 4:04:41 AM - Present time
+                    </li>
+                    <li>
+                        637895666816208168 //this will return true as this time has already passed
+                    </li>
+                    <li>
+                        5/31/2022 4:05:01 AM - Present time plus 20 seconds into future
+                    </li>
+                    <li>
+                        637895667016208170 // this will return false as this time has not passed
+                    </li>
+                </ul>
+            </p>
+            <br />
+
+
+            <div style="width:60%; margin-top: 10px; margin-bottom:10px;">
+<textarea id="code" name="code" readonly="readonly" style="width:60%;">var dateCheck = dateProc("637895667016208170") // returns false
+var dateCheckPresent = dateProc("637895666816208168")// returns true</textarea>
+            </div>
+            <br />
+            <br />
+            <p>
+                This process is used for dynamic NFTs that perform certain actions after a specific date has been reached. 
+            </p>
+        </div>
+    </RadzenCard>
+
+
+</div>
+
+
+@code {
+    [Inject] private IJSRuntime _js { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        //await _js.InvokeVoidAsync("highlightSnippet");
+        if(firstRender)
+        {
+            var output = await _js.InvokeAsync<string>("highlightSnippet");
+            await InvokeAsync( StateHasChanged );
+        }
+
+    }
+}

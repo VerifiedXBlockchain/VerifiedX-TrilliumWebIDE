@@ -1,0 +1,85 @@
+﻿@page "/trilliumlogical"
+
+<div class="row-cols-md-8">
+    <RadzenCard class="m-1" style="margin-bottom: 15px !important;">
+        <h3 class="h3" style="color:darkturquoise;">Logical Operators in Trillium</h3>
+        <div class="row">
+                <p>
+                    Logical operators are used to determine the logic between variables or values:
+                </p>
+                <br />
+                <p>
+                    The Relational Operators in Trillium are the following:
+                </p>
+                <ul style="margin-left:18px;">
+                    <li>
+                        && (AND) – It is used to check if both the operands are true.
+                    </li>
+                    <li>
+                        || (OR) – These operators are used to check if at least one of the operand is true.
+                    </li>
+                    <li>
+                        ! (NOT) – Used to check if the operand is false
+                    </li>
+                </ul>
+        </div>
+    </RadzenCard>
+    <RadzenCard class="m-1" style="margin-bottom: 15px !important;">
+        <h3 class="h3" style="color:darkturquoise;">A Basic Conditional Statement with Logical Params</h3>
+        <div class="row">
+            <br />
+            <p>
+                If the logical statement is satisfied (it is true), then the program will return the value 1, otherwise, 
+                if the relational statement is not satisfied (it is false), the program will return the value 0. 
+            </p>
+           
+            <br />
+
+
+            <div style="width:60%; margin-top: 10px; margin-bottom:10px;">
+<textarea id="code" name="code" readonly="readonly" style="width:60%;">function tMain(step : int) : string 
+{
+  var a = 10
+  var b = 10
+  var c = 20
+
+
+  if(a == b && step == 1)
+  {
+    return "a does equal b" // returns this string
+  }
+  if(a > b && step == 2)
+  {
+    return "a is greater than b" // does not return this
+  }
+  if(c >= b && step == 3)
+  {
+    return "c is greater than b" // returns this string
+  }
+  
+  return "Nothing To Do"
+}</textarea>
+            </div>
+            <br />
+            <br />
+        </div>
+    </RadzenCard>
+
+
+</div>
+
+
+@code {
+    [Inject] private IJSRuntime _js { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        //await _js.InvokeVoidAsync("highlightSnippet");
+        if(firstRender)
+        {
+            var output = await _js.InvokeAsync<string>("highlightSnippet");
+            await InvokeAsync( StateHasChanged );
+        }
+
+    }
+}

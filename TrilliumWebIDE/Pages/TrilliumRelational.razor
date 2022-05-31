@@ -1,0 +1,96 @@
+﻿@page "/trilliumrelational"
+
+<div class="row-cols-md-8">
+    <RadzenCard class="m-1" style="margin-bottom: 15px !important;">
+        <h3 class="h3" style="color:darkturquoise;">Relational Operators in Trillium</h3>
+        <div class="row">
+                <p>
+                    It is used to compare two numbers by checking whether they are equal or not, 
+                    less than, less than or equal to, greater than, greater than or equal to.
+                </p>
+                <br />
+                <p>
+                    The Relational Operators in Trillium are the following:
+                </p>
+                <ul style="margin-left:18px;">
+                    <li>
+                        == (Equal to)– This operator is used to check if both operands are equal.
+                    </li>
+                    <li>
+                        !=  (Not equal to)– Can check if both operands are not equal.
+                    </li>
+                    <li>
+                        > (Greater than)– Can check if the first operand is greater than the second.
+                    </li>
+                    <li>
+                        @(@"<") (Less than)- Can check if the first operand is lesser than the second.
+                    </li>
+                    <li>
+                        >=  (Greater than equal to)– Check if the first operand is greater than or equal to the second.
+                    </li>
+                    <li>
+                        @(@"<=") (Less than equal to)– Check if the first operand is lesser than or equal to the second
+                    </li>
+                </ul>
+        </div>
+    </RadzenCard>
+    <RadzenCard class="m-1" style="margin-bottom: 15px !important;">
+        <h3 class="h3" style="color:darkturquoise;">A Basic Conditional Statement</h3>
+        <div class="row">
+            <br />
+            <p>
+                If the relational statement is satisfied (it is true), then the program will return the value 1, otherwise, 
+                if the relational statement is not satisfied (it is false), the program will return the value 0. The 1's and 0's 
+                are still perceived as 'True' and 'False' however. 
+            </p>
+           
+            <br />
+
+
+            <div style="width:60%; margin-top: 10px; margin-bottom:10px;">
+<textarea id="code" name="code" readonly="readonly" style="width:60%;">function tMain(step : int) : string 
+{
+  var a = 10
+  var b = 10
+  var c = 20
+
+
+  if(a == b && step == 1)
+  {
+    return "a does equal b" // returns this string
+  }
+  if(a > b && step == 2)
+  {
+    return "a is greater than b" // does not return this
+  }
+  if(c >= b && step == 3)
+  {
+    return "c is greater than b" // returns this string
+  }
+  
+  return "Nothing To Do"
+}</textarea>
+            </div>
+            <br />
+            <br />
+        </div>
+    </RadzenCard>
+
+
+</div>
+
+
+@code {
+    [Inject] private IJSRuntime _js { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        //await _js.InvokeVoidAsync("highlightSnippet");
+        if(firstRender)
+        {
+            var output = await _js.InvokeAsync<string>("highlightSnippet");
+            await InvokeAsync( StateHasChanged );
+        }
+
+    }
+}

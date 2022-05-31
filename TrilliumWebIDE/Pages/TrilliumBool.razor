@@ -1,0 +1,120 @@
+﻿@page "/trilliumbool"
+
+<div class="row-cols-md-8">
+    <RadzenCard class="m-1" style="margin-bottom: 15px !important;">
+        <h3 class="h3" style="color:darkturquoise;">Booleans in Trillium</h3>
+        <div class="row">
+                <p>
+                    A boolean type is declared with the var keyword, or with the implicit : bool and can only take the values true or false.
+                </p>
+                <br />
+                <p>
+                    Below we will show you how booleans are handled in Trillium and how you can define booleans.
+                </p>
+        </div>
+    </RadzenCard>
+    <RadzenCard class="m-1" style="margin-bottom: 15px !important;">
+        <h3 class="h3" style="color:darkturquoise;">Declaring Booleans</h3>
+        <div class="row">
+            <br />
+            <p>
+                Below we show you to declare booleans
+            </p>
+           
+            <br />
+
+
+            <div style="width:60%; margin-top: 10px; margin-bottom:10px;">
+<textarea id="code" name="code" readonly="readonly" style="width:60%;">
+var someTruth = true
+var someLie : bool = false</textarea>
+            </div>
+            <br />
+            <br />
+            <p>
+                Above you can see we first create a bool variable by defining 'var someTruth' and setting it equal to true. You can also define a bool implicitly
+                by using the ' : bool ' nomenclature. 
+            </p>
+        </div>
+    </RadzenCard>
+
+        <RadzenCard class="m-1" style="margin-bottom: 15px !important;">
+        <h3 class="h3" style="color:darkturquoise;">Using Booleans</h3>
+        <div class="row">
+            <br />
+            <p>
+                Bools have a wide variety of use as they can be the result against other variable types like strings or ints.
+            </p>
+           
+            <br />
+
+            <div style="width:60%; margin-top: 10px; margin-bottom:10px;">
+<textarea id="code2" name="code" readonly="readonly" style="width:60%;">var someTruth = true
+var someLie : bool = false
+
+someTruth == someLie // false
+someTruth != someLie // true
+
+9 == 8 //false
+9 != 8 //true
+
+9 > 8 //true
+9 @(@"<") 8 //false
+
+"Trillium" == "Trillium" //true
+"Trillium" != "Trillium" //false</textarea>
+            </div>
+            <br />
+            <br />
+            <p>
+                We can see above some common uses for bools in Trillium. Of course this is a basic example and other use cases exist.
+            </p>
+        </div>
+    </RadzenCard>
+
+            <RadzenCard class="m-1" style="margin-bottom: 15px !important;">
+        <h3 class="h3" style="color:darkturquoise;">Casting to a Boolean</h3>
+        <div class="row">
+            <br />
+            <p>
+                Depending on the return type a method uses it won't always return a boolean, but rather a string of a boolean like 'true', so we need to cast this to a 
+                boolean.
+            </p>
+           
+            <br />
+
+            <div style="width:60%; margin-top: 10px; margin-bottom:10px;">
+<textarea id="code3" name="code" readonly="readonly" style="width:60%;">
+function turnStringToBool(someBool : string) : bool
+{
+  var stringBool = bool(someBool)
+  return stringBool
+}</textarea>
+            </div>
+            <br />
+            <br />
+            <p>
+                If we pass the string <span style="color:gold;">'true'</span> to our method above it will return a boolean value of <span style="color:darkturquoise;">True</span>
+            </p>
+        </div>
+    </RadzenCard>
+
+</div>
+
+
+@code {
+    [Inject] private IJSRuntime _js { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        //await _js.InvokeVoidAsync("highlightSnippet");
+        if(firstRender)
+        {
+            var output = await _js.InvokeAsync<string>("highlightSnippet");
+            var output2 = await _js.InvokeAsync<string>("highlightSnippet2");
+            var output3 = await _js.InvokeAsync<string>("highlightSnippet3");
+            await InvokeAsync( StateHasChanged );
+        }
+
+    }
+}

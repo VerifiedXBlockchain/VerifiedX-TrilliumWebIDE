@@ -1,0 +1,142 @@
+﻿@page "/trilliumint"
+
+<div class="row-cols-md-8">
+    <RadzenCard class="m-1" style="margin-bottom: 15px !important;">
+        <h3 class="h3" style="color:darkturquoise;">Integers in Trillium</h3>
+        <div class="row">
+                <p>
+                    The int data type can store whole numbers from -2147483648 to 2147483647. In general 
+                    the int data type is the preferred data type when we create variables with a numeric value.
+                </p>
+                <br />
+                <p>
+                    Below we will show you how integers are handled in Trillium and how you can define integers.
+                </p>
+        </div>
+    </RadzenCard>
+    <RadzenCard class="m-1" style="margin-bottom: 15px !important;">
+        <h3 class="h3" style="color:darkturquoise;">Declaring Integers</h3>
+        <div class="row">
+            <br />
+            <p>
+                Below we show you to declare integers
+            </p>
+           
+            <br />
+
+
+            <div style="width:60%; margin-top: 10px; margin-bottom:10px;">
+<textarea id="code" name="code" readonly="readonly" style="width:60%;">
+var someNum = 13
+var someNumDefined : int = 13</textarea>
+            </div>
+            <br />
+            <br />
+            <p>
+                Above you can see we first create a integer variable by defining 'var someNum' and setting it equal to 13. You can also define a integer implicitly
+                by using the ' : int ' nomenclature. 
+            </p>
+        </div>
+    </RadzenCard>
+
+        <RadzenCard class="m-1" style="margin-bottom: 15px !important;">
+        <h3 class="h3" style="color:darkturquoise;">Using Integer</h3>
+        <div class="row">
+            <br />
+            <p>
+                Ints have a wide variety of use as they can be the result against other variable types like strings.
+                We recommend look at our calculator example to see integers. Below is a video of this method being made as well.
+            </p>
+           
+            <br />
+
+            <div style="width:60%; margin-top: 10px; margin-bottom:10px;">
+<textarea id="code2" name="code" readonly="readonly" style="width:60%;">function calculator(firstNum : int, secondNum : int, operator : string) : string
+{
+    var result = 0
+    if operator == "+"
+    {
+        result = firstNum + secondNum
+        return string(result)
+    }
+    else if operator == "-"
+    {
+        result = firstNum - secondNum
+        return string(result)
+    }
+    else if operator == "*"
+    {
+        result = firstNum * secondNum
+        return string(result)
+    }
+    else if operator == "/"
+    {
+        result = firstNum / secondNum
+        return string(result)
+    }
+    else 
+    {
+        return "No known operator was given"
+    }
+}</textarea>
+            </div>
+            <br />
+            <br />
+            <p>
+                We can see above some common uses for ints in Trillium. Of course this is a basic example and other use cases exist.
+            </p>
+        </div>
+    </RadzenCard>
+
+    <RadzenCard class="m-1" style="margin-bottom: 15px !important;">
+        <h3 class="h3" style="color:darkturquoise;">Casting to a Integer</h3>
+        <div class="row">
+            <br />
+            <p>
+                Depending on the return type a method uses it won't always return a int, but rather a string of a int like '1337', so we need to cast this to a 
+                int.
+            </p>
+           
+            <br />
+
+            <div style="width:60%; margin-top: 10px; margin-bottom:10px;">
+<textarea id="code3" name="code" readonly="readonly" style="width:60%;">
+function turnStringToInt(someInt : string) : int
+{
+  var stringInt = bool(someInt)
+  return stringInt
+}</textarea>
+            </div>
+            <br />
+            <br />
+            <p>
+                If we pass the string <span style="color:gold;">'1337'</span> to our method above it will return a boolean value of <span style="color:darkturquoise;">1337</span>
+            </p>
+        </div>
+    </RadzenCard>
+
+    <RadzenCard class="m-1" style="margin-bottom: 15px !important;">
+        <h3 class="h3" style="color:darkturquoise;">Making a Calculator in tIDE</h3>
+        <video class="w-100" id="tcalcvideo" style="max-width: 800px;" controls="controls" _bl_796fa517-712e-4cf5-b8d6-7a4d940f2947="">
+            <source src="videos/trillcalc.mp4" type="video/mp4">
+        </video>
+    </RadzenCard>
+</div>
+
+
+@code {
+    [Inject] private IJSRuntime _js { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        //await _js.InvokeVoidAsync("highlightSnippet");
+        if(firstRender)
+        {
+            var output = await _js.InvokeAsync<string>("highlightSnippet");
+            var output2 = await _js.InvokeAsync<string>("highlightSnippet2");
+            var output3 = await _js.InvokeAsync<string>("highlightSnippet3");
+            await InvokeAsync( StateHasChanged );
+        }
+
+    }
+}
