@@ -4,7 +4,7 @@
 [![Generic badge](https://img.shields.io/badge/C%23-10%2E0-blue.svg)](https://shields.io/)
 [![Generic badge](https://img.shields.io/badge/%2ENet%20Core-6%2E0-blue.svg)](https://shields.io/)
 
-![license](https://img.shields.io/github/license/ReserveBlockIO/TrilliumWebIDE)
+![GitHub](https://img.shields.io/github/license/ReserveBlockIO/TrilliumWebIDE)
 ![build](https://img.shields.io/github/workflow/status/ReserveBlockIO/TrilliumWebIDE/.NET)
 ![issues](https://img.shields.io/github/issues/ReserveBlockIO/TrilliumWebIDE)
 ![Discord](https://img.shields.io/discord/917499597692211260?label=discord)
