@@ -106,106 +106,135 @@ function helloWorld(name : string) : string
         var repl = _trilliumService.TrillRepl();
         repl.Run("#reset");
         var compile = repl.Run(code.ToString());
-        var result = repl.Run(codeToRun);
-        if(compile != null)
+        var task = Task.Run(() =>
         {
-            if(compile.Diagnostics.Count() == 0)
-            {
-                var resultStr = "[" + localTime.ToString() + "]: ";
-                runResultsDate = resultStr;
-                runResults = "Code Compiled Successfully.";
-                var message = new NotificationMessage
-                {
-                    Detail = "Successful Compile!",
-                    Duration = 7000,
-                    Severity = NotificationSeverity.Success,
-                    Summary = "Your code has successfully compiled!",
-                };
-                NotificationService.Notify(message);
-            }
-            else
-            {
-                runResult = false;
-                var resultStr = "[" + localTime.ToString() + "]: ";
-                var diagCount = compile.Diagnostics.Count() - 1;
-                StringBuilder strBld = new StringBuilder();
+            return InfiniteLoopCheck(codeToRun);
+        });
 
-                var message = new NotificationMessage
-                {
-                    Detail = "Fail!",
-                    Duration = 7000,
-                    Severity = NotificationSeverity.Error,
-                    Summary = "Your code has failed to compile!",
-                };
-                NotificationService.Notify(message);
-
-                foreach(var diag in compile.Diagnostics)
-                {
-                    var diagLine = "ERROR - " + "Line: (" + (diag.Location.StartLine + 1).ToString() + ")" + " Message: " + diag.Message;
-                    strBld.AppendLine(diagLine);
-                }
-                runResults = strBld.ToString();
-            }
-            if(result != null)
-            {
-                if(runResult == true)
-                {
-                    if(result.Value != null)
-                    {
-                        var resultStr = "[" + localTime.ToString() + "]: ";
-                        if(result.Value != "")
-                        {
-                            var message = new NotificationMessage
-                            {
-                                Detail = "Successful Execute!",
-                                Duration = 7000,
-                                Severity = NotificationSeverity.Success,
-                                Summary = "Your code has successfully executed (Ran)!",
-                            };
+        bool isCompletedSuccessfully = task.Wait(TimeSpan.FromMilliseconds(15000));
+        if (!isCompletedSuccessfully)
+        {
+            var message = new NotificationMessage
+                                {
+                                    Detail = "Fail!",
+                                    Duration = 7000,
+                                    Severity = NotificationSeverity.Error,
+                                    Summary = "Infinite Loop detected! Terminating Sequence.",
+                                };
                             NotificationService.Notify(message);
-                            runResultsDate = resultStr;
-                            runResults = result.Value.ToString();
-                        }
-                        else
+        }
+        else
+        {
+            var result = repl.Run(codeToRun);
+            if (compile != null)
+            {
+                if (compile.Diagnostics.Count() == 0)
+                {
+                    var resultStr = "[" + localTime.ToString() + "]: ";
+                    runResultsDate = resultStr;
+                    runResults = "Code Compiled Successfully.";
+                    var message = new NotificationMessage
                         {
-                            runResultsDate = resultStr;
-                            runResults = "Code Compiled Successfully.";
-                        }
+                            Detail = "Successful Compile!",
+                            Duration = 7000,
+                            Severity = NotificationSeverity.Success,
+                            Summary = "Your code has successfully compiled!",
+                        };
+                    NotificationService.Notify(message);
+                }
+                else
+                {
+                    runResult = false;
+                    var resultStr = "[" + localTime.ToString() + "]: ";
+                    var diagCount = compile.Diagnostics.Count() - 1;
+                    StringBuilder strBld = new StringBuilder();
 
-                        await InvokeAsync( StateHasChanged );
-                    }
-                    else
-                    {
-                        var resultStr = "[" + localTime.ToString() + "]: ";
-                        var diagCount = result.Diagnostics.Count() - 1;
-                        StringBuilder strBld = new StringBuilder();
-
-                        var message = new NotificationMessage
+                    var message = new NotificationMessage
                         {
                             Detail = "Fail!",
                             Duration = 7000,
                             Severity = NotificationSeverity.Error,
-                            Summary = "Your code has failed to execute (Run)!",
+                            Summary = "Your code has failed to compile!",
                         };
-                        NotificationService.Notify(message);
+                    NotificationService.Notify(message);
 
-                        foreach(var diag in result.Diagnostics)
-                        {
-                            var diagLine = "ERROR - " + "Line: (" + (diag.Location.StartLine + 1).ToString() + ")" + " Message: " + diag.Message;
-                            strBld.AppendLine(diagLine);
-                        }
-                        runResults = strBld.ToString();
+                    foreach (var diag in compile.Diagnostics)
+                    {
+                        var diagLine = "ERROR - " + "Line: (" + (diag.Location.StartLine + 1).ToString() + ")" + " Message: " + diag.Message;
+                        strBld.AppendLine(diagLine);
                     }
+                    runResults = strBld.ToString();
                 }
-                runResult = true;
+                if (result != null)
+                {
+                    if (runResult == true)
+                    {
+                        if (result.Value != null)
+                        {
+                            var resultStr = "[" + localTime.ToString() + "]: ";
+                            if (result.Value != "")
+                            {
+                                var message = new NotificationMessage
+                                    {
+                                        Detail = "Successful Execute!",
+                                        Duration = 7000,
+                                        Severity = NotificationSeverity.Success,
+                                        Summary = "Your code has successfully executed (Ran)!",
+                                    };
+                                NotificationService.Notify(message);
+                                runResultsDate = resultStr;
+                                runResults = result.Value.ToString();
+                            }
+                            else
+                            {
+                                runResultsDate = resultStr;
+                                runResults = "Code Compiled Successfully.";
+                            }
 
+                            await InvokeAsync(StateHasChanged);
+                        }
+                        else
+                        {
+                            var resultStr = "[" + localTime.ToString() + "]: ";
+                            var diagCount = result.Diagnostics.Count() - 1;
+                            StringBuilder strBld = new StringBuilder();
+
+                            var message = new NotificationMessage
+                                {
+                                    Detail = "Fail!",
+                                    Duration = 7000,
+                                    Severity = NotificationSeverity.Error,
+                                    Summary = "Your code has failed to execute (Run)!",
+                                };
+                            NotificationService.Notify(message);
+
+                            foreach (var diag in result.Diagnostics)
+                            {
+                                var diagLine = "ERROR - " + "Line: (" + (diag.Location.StartLine + 1).ToString() + ")" + " Message: " + diag.Message;
+                                strBld.AppendLine(diagLine);
+                            }
+                            runResults = strBld.ToString();
+                        }
+                    }
+                    runResult = true;
+
+                }
+            }
+            else
+            {
+                runResults = "Please add code before trying to run.";
             }
         }
-        else
-        {
-            runResults = "Please add code before trying to run.";
-        }
+    }
 
+    private bool InfiniteLoopCheck(string codeToRun)
+    {
+        var result = false;
+        var repl = _trilliumService.TrillRepl();
+        var codeResult = repl.Run(codeToRun);
+
+        result = true;
+        return result;
     }
 
     private async Task CopyValue()
