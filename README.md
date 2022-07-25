@@ -12,8 +12,6 @@
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/ReserveBlockIO/TrilliumWebIDE)
 ![GitHub last commit](https://img.shields.io/github/last-commit/ReserveBlockIO/TrilliumWebIDE)
 
-![GitHub Release Date](https://img.shields.io/github/release-date/ReserveBlockIO/TrilliumWebIDE)
-
 Trillium is the smart contract language that will be powering our smart contracts. This is a from scratch language that has roots from C#, C, and some Javascript.
 
 # tIDE - The Trillium Browser Based IDE
