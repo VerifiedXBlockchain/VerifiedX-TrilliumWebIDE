@@ -4,13 +4,13 @@
 [![Generic badge](https://img.shields.io/badge/C%23-10%2E0-blue.svg)](https://shields.io/)
 [![Generic badge](https://img.shields.io/badge/%2ENet%20Core-6%2E0-blue.svg)](https://shields.io/)
 
-![GitHub](https://img.shields.io/github/license/ReserveBlockIO/TrilliumWebIDE)
-![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/ReserveBlockIO/TrilliumWebIDE/dotnet.yml)
-![issues](https://img.shields.io/github/issues/ReserveBlockIO/TrilliumWebIDE)
+![GitHub](https://img.shields.io/github/license/VerifiedXBlockchain/VerifiedX-TrilliumWebIDE)
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/VerifiedXBlockchain/VerifiedX-TrilliumWebIDE/dotnet.yml)
+![issues](https://img.shields.io/github/issues/VerifiedXBlockchain/VerifiedX-TrilliumWebIDE)
 ![Discord](https://img.shields.io/discord/917499597692211260?label=discord)
 
-![GitHub commit activity](https://img.shields.io/github/commit-activity/m/ReserveBlockIO/TrilliumWebIDE)
-![GitHub last commit](https://img.shields.io/github/last-commit/ReserveBlockIO/TrilliumWebIDE)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/m/VerifiedXBlockchain/VerifiedX-TrilliumWebIDE)
+![GitHub last commit](https://img.shields.io/github/last-commit/VerifiedXBlockchain/VerifiedX-TrilliumWebIDE)
 
 Trillium is the smart contract language that will be powering our smart contracts. This is a from scratch language that has roots from C#, C, and some Javascript.
 
